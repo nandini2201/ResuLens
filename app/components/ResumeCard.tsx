@@ -17,7 +17,7 @@ const ResumeCard = ({
     let objectUrl = "";
 
     const loadResume = async () => {
-      if (imagePath.startsWith("/")) {
+      if (imagePath.startsWith("/images/")) {
         setResumeUrl(imagePath);
         return;
       }
