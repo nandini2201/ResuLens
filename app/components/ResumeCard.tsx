@@ -42,7 +42,7 @@ const ResumeCard = ({
           <p>{companyName || "Open target"}</p>
           <h3>{jobTitle || "Resume report"}</h3>
         </div>
-        <ScoreCircle score={feedback.overallScore} />
+        <ScoreCircle score={feedback.ATS.score} />
       </div>
       <div className="resume-card-preview">
         {resumeUrl ? (
@@ -50,10 +50,6 @@ const ResumeCard = ({
         ) : (
           <img src="/images/resume-scan-2.gif" alt="Loading resume preview" />
         )}
-      </div>
-      <div className="card-score-row">
-        <span>ATS</span>
-        <strong>{feedback.ATS.score}/100</strong>
       </div>
     </Link>
   );

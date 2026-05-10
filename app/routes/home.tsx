@@ -43,7 +43,7 @@ export default function Home() {
 
   const averageScore = useMemo(() => {
     if (!resumes.length) return 0;
-    const total = resumes.reduce((sum, resume) => sum + resume.feedback.overallScore, 0);
+    const total = resumes.reduce((sum, resume) => sum + resume.feedback.ATS.score, 0);
     return Math.round(total / resumes.length);
   }, [resumes]);
 
@@ -71,7 +71,7 @@ export default function Home() {
             </div>
             <div>
               <span>{averageScore || "--"}</span>
-              <p>Average</p>
+              <p>Avg ATS</p>
             </div>
             <div>
               <span>{latestRole}</span>

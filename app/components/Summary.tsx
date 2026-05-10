@@ -17,11 +17,11 @@ const Summary = ({ feedback }: { feedback: Feedback }) => {
   return (
     <section className="summary-panel">
       <div className="score-feature">
-        <ScoreGauge score={feedback.overallScore} />
+        <ScoreGauge score={feedback.ATS.score} />
         <div>
-          <p className="eyebrow">Overall readiness</p>
-          <h2>{feedback.overallScore}/100</h2>
-          <p className="muted-copy">Composite score from tone, content, structure, skills, and ATS readability.</p>
+          <p className="eyebrow">ATS score</p>
+          <h2>{feedback.ATS.score}/100</h2>
+          <p className="muted-copy">Single score based on keyword match, format readability, role relevance, and recruiter searchability.</p>
         </div>
       </div>
 
