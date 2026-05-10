@@ -1,5 +1,5 @@
 import { type FormEvent, useEffect, useMemo, useState } from "react";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import Navbar from "~/components/Navbar";
 import FileUploader from "~/components/FileUploader";
 import { prepareInstructions } from "~/constants";
@@ -90,6 +90,7 @@ const steps = ["Upload", "Preview", "Analyze", "Report"];
 const Upload = () => {
   const { auth, isLoading, fs, ai, kv } = usePuterStore();
   const navigate = useNavigate();
+  const location = useLocation();
   const [isProcessing, setIsProcessing] = useState(false);
   const [statusText, setStatusText] = useState("");
   const [file, setFile] = useState<File | null>(null);
@@ -102,6 +103,19 @@ const Upload = () => {
       navigate("/auth?next=/upload");
     }
   }, [auth.isAuthenticated, isLoading, navigate]);
+
+  useEffect(() => {
+    if (location.hash !== "#resume-upload") return;
+
+    const scrollTimer = window.setTimeout(() => {
+      document.getElementById("resume-upload")?.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
+    }, 80);
+
+    return () => window.clearTimeout(scrollTimer);
+  }, [location.hash]);
 
   const handleFileSelect = (selectedFile: File | null) => {
     setFile(selectedFile);
@@ -269,7 +283,7 @@ const Upload = () => {
               <textarea rows={7} name="job-description" placeholder="Paste the role requirements, skills, and responsibilities." id="job-description" />
             </div>
 
-            <div className="form-div">
+            <div className="form-div upload-anchor" id="resume-upload" tabIndex={-1}>
               <label htmlFor="uploader">Resume PDF</label>
               <FileUploader onFileSelect={handleFileSelect} disabled={isProcessing} />
             </div>
